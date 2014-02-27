@@ -1,0 +1,12 @@
+{
+  "name": "language-elixir",
+  "version": "0.0.0",
+  "description": "Elixir language support in Atom",
+  "repository": "https://github.com/lucasmazza/language-elixir",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}

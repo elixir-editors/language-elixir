@@ -1,0 +1,4 @@
+'.source.elixir':
+  'editor':
+    'increaseIndentPattern': '(after|else|catch|rescue|^.*(do|<\\-|\\->|\\{|\\[))\\s*$'
+    'decreaseIndentPattern': '^\\s*((\\}|\\])\\s*$|(after|else|catch|rescue|end)\\b)'

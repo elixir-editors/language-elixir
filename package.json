@@ -3,7 +3,7 @@
   "engines": {
     "atom": ">0.50.0"
   },
-  "license": "MIT",
+  "license": "Apache 2.0",
   "name": "language-elixir",
   "repository": "https://github.com/lucasmazza/language-elixir",
   "version": "0.1.0"

@@ -511,7 +511,7 @@
     'name': 'keyword.operator.comparison.elixir'
   }
   {
-    'match': '(\\|\\|\\||&&&|^^^|<<<|>>>|~~~)'
+    'match': '(\\|\\|\\||&&&|\\^\\^\\^|<<<|>>>|~~~)'
     'name': 'keyword.operator.bitwise.elixir'
   }
   {

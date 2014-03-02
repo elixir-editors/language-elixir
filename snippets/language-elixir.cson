@@ -1,7 +1,7 @@
 '.source.elixir':
   'def':
     'prefix': 'def'
-    'body': 'def $1 do\n\t$0\nend\n'
+    'body': 'def $1 do\n\t$0\nend'
   'defmacro':
     'prefix': 'defmacro'
     'body': 'defmacro $1 do\n\t$0\nend'

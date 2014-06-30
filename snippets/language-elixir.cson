@@ -20,3 +20,6 @@
   'moduledoc':
     'prefix': 'mdoc'
     'body': '@moduledoc """\n$0\n"""'
+  'test':
+    'prefix': 'test'
+    'body': 'test "$1" do\n\t$0\nend'

@@ -1,4 +1,10 @@
 '.source.elixir':
+  'case':
+    'prefix': 'case'
+    'body': 'case $1 do\n\t$0\nend'
+  'cond':
+    'prefix': 'cond'
+    'body': 'cond $1 do\n\t$0\nend'
   'def':
     'prefix': 'def'
     'body': 'def $1 do\n\t$0\nend'

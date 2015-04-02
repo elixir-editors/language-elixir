@@ -1,7 +1,7 @@
 {
   "description": "Elixir language support for Atom.",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">= 0.189.0"
   },
   "license": "Apache 2.0",
   "name": "language-elixir",

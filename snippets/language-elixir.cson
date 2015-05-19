@@ -30,7 +30,7 @@
     'prefix': 'mdoc'
     'body': '@moduledoc """\n$0\n"""'
   'defprotocol':
-    'prefix': 'defp'
+    'prefix': 'defpro'
     'body': 'defprotocol $1 do\n\t$0\nend'
   'defimpl':
     'prefix': 'defi'

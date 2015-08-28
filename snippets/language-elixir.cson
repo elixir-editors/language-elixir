@@ -38,6 +38,9 @@
   'defimpl':
     'prefix': 'defi'
     'body': 'defimpl ${1:protocol}, for: ${2:type} do\n\t$0\nend'
+  'defoverridable':
+    'prefix': 'defover'
+    'body': 'defoverridable [${1:function_name}: ${2:arity}]'
   'IO.inspect':
     'prefix': 'ii'
     'body': 'IO.inspect($0)'

@@ -1,46 +1,128 @@
-'.source.elixir':
-  'case':
-    'prefix': 'case'
-    'body': 'case $1 do\n\t$0\nend'
-  'cond':
-    'prefix': 'cond'
-    'body': 'cond do\n\t$0\nend'
-  'def':
-    'prefix': 'def'
-    'body': 'def $1 do\n\t$0\nend'
-  'defmacro':
-    'prefix': 'defmacro'
-    'body': 'defmacro $1 do\n\t$0\nend'
-  'defmacrop':
-    'prefix': 'defmacrop'
-    'body': 'defmacrop $1 do\n\t$0\nend'
-  'defmodule':
-    'prefix': 'defmodule'
-    'body': 'defmodule $1 do\n\t$0\nend'
-  'defp':
-    'prefix': 'defp'
-    'body': 'defp $1 do\n\t$0\nend'
-  'do':
-    'prefix': 'do'
-    'body': 'do\n\t$0\nend'
-  'doc':
-    'prefix': 'doc'
-    'body': '@doc """\n$0\n"""'
-  'if':
-    'prefix': 'if'
-    'body': 'if $1 do\n\t$0\nend'
-  'moduledoc':
-    'prefix': 'mdoc'
-    'body': '@moduledoc """\n$0\n"""'
-  'defprotocol':
-    'prefix': 'defpro'
-    'body': 'defprotocol $1 do\n\t$0\nend'
-  'defimpl':
-    'prefix': 'defi'
-    'body': 'defimpl ${1:protocol}, for: ${2:type} do\n\t$0\nend'
-  'IO.inspect':
-    'prefix': 'ii'
-    'body': 'IO.inspect($0)'
-  'test':
-    'prefix': 'test'
-    'body': 'test "$1" do\n\t$0\nend'
+".source.elixir":
+  def:
+    prefix: "def"
+    body: '''
+      def $1 do
+      	$0
+      end
+    '''
+  defcallback:
+    prefix: "defc"
+    body: "defcallback $1 :: $0"
+  defdelegate:
+    prefix: "defd"
+    body: "defdelegate $1 to: $0"
+  defexception:
+    prefix: "defe"
+    body: "defexception [${1::message}]"
+  defimpl:
+    prefix: "defi"
+    body: '''
+      defimpl $1, for: $2 do
+        $0
+      end
+    '''
+  defmacro:
+    prefix: "defm"
+    body: '''
+      defmacro $1 do
+      	$0
+      end
+    '''
+  defmacrocallback:
+    prefix: "defmc"
+    body: "defmacrocallback $1 :: $0"
+  defmacrop:
+    prefix: "defmp"
+    body: '''
+      defmacrop $1 do
+      	$0
+      end
+    '''
+  defmodule:
+    prefix: "defmod"
+    body: '''
+      defmodule $1 do
+      	$0
+      end
+    '''
+  defp:
+    prefix: "defp"
+    body: '''
+      defp $1 do
+      	$0
+      end
+    '''
+  defprotocol:
+    prefix: "defpro"
+    body: '''
+      defprotocol $1 do
+        $0
+      end
+    '''
+  defstruct:
+    prefix: "defs"
+    body: "defstruct $1: $2"
+  doc:
+    prefix: "doc"
+    body: '''
+      @doc """
+      $0
+      """
+    '''
+  "IO.inspect":
+    prefix: "ii"
+    body: "IO.inspect($0)"
+  moduledoc:
+    prefix: "mdoc"
+    body: '''
+      @moduledoc """
+      $0
+      """
+    '''
+  receive:
+    prefix: "rec"
+    body: '''
+      receive do
+      	${1:{${2::message_type}, ${3:value}\\}} ->
+          ${0:# code}
+      end
+
+    '''
+  require:
+    prefix: "req"
+    body: "require $0"
+  test:
+    prefix: 'test'
+    body: '''
+      test $1 do
+        $0
+      end
+    '''
+  if:
+    prefix: 'if'
+    body: '''
+      if $1 do
+        $0
+      end
+    '''
+  do:
+    prefix: 'do'
+    body: '''
+      do
+        $0
+      end'
+  cond:
+    prefix: 'cond'
+    body: '''
+      cond do
+        $0
+      end
+    '''
+  case:
+    prefix: 'case'
+    body: '''
+      case $1 do
+        $0
+      end
+    '''

@@ -111,7 +111,8 @@
     body: '''
       do
         $0
-      end'
+      end
+    '''
   cond:
     prefix: 'cond'
     body: '''

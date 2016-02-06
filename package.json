@@ -5,6 +5,6 @@
   },
   "license": "Apache 2.0",
   "name": "language-elixir",
-  "repository": "https://github.com/lucasmazza/language-elixir",
+  "repository": "https://github.com/elixir-lang/language-elixir",
   "version": "0.8.0"
 }

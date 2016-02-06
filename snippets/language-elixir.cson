@@ -7,22 +7,22 @@
     'body': 'cond do\n\t$0\nend'
   'def':
     'prefix': 'def'
-    'body': 'def $1 do\n\t$0\nend'
+    'body': 'def ${1:function_name} do\n\t$0\nend'
+  'defp':
+    'prefix': 'defp'
+    'body': 'defp ${1:function_name} do\n\t$0\nend'
   'defmacro':
     'prefix': 'defmacro'
-    'body': 'defmacro $1 do\n\t$0\nend'
+    'body': 'defmacro ${1:macro_name} do\n\t$0\nend'
   'defmacrop':
     'prefix': 'defmacrop'
-    'body': 'defmacrop $1 do\n\t$0\nend'
+    'body': 'defmacrop ${1:macro_name} do\n\t$0\nend'
   'defmodule':
     'prefix': 'defmodule'
     'body': 'defmodule $1 do\n\t$0\nend'
   'defstruct':
     'prefix': 'defstruct'
     'body': 'defstruct [$1]'
-  'defp':
-    'prefix': 'defp'
-    'body': 'defp $1 do\n\t$0\nend'
   'do':
     'prefix': 'do'
     'body': 'do\n\t$0\nend'

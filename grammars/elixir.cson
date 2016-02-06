@@ -61,8 +61,16 @@
     'name': 'keyword.other.special-method.elixir'
   }
   {
-    'match': '(?<!\\.)\\b(do|end|case|bc|lc|for|if|cond|with|unless|try|receive|fn|defmodule|defp?|defprotocol|defimpl|defrecord|defstruct|defmacrop?|defdelegate|defcallback|defexception|defoverridable|exit|after|rescue|catch|else|raise|throw|quote|unquote|super|when)\\b(?![?!])'
+    'match': '(?<!\\.)\\b(do|end|case|bc|lc|for|if|cond|with|unless|try|receive|fn|defmodule|defprotocol|defimpl|defrecord|defstruct|defdelegate|defcallback|defexception|defoverridable|exit|after|rescue|catch|else|raise|throw|quote|unquote|super|when)\\b(?![?!])'
     'name': 'keyword.control.elixir'
+  }
+  {
+    'comment': 'functions and arguments'
+    'match': '\\b(defp?|defmacrop?)\\b\\s*([_$a-zA-Z][$\\w]*[!?]?)?'
+    'captures': {
+      '1': { 'name': 'keyword.control.elixir' }
+      '2': { 'name': 'entity.name.function.elixir' }
+    }
   }
   {
     'comment': ' as above, just doesn\'t need a \'end\' and does a logic operation'

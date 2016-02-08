@@ -50,6 +50,9 @@
   'IO.inspect':
     'prefix': 'ii'
     'body': 'IO.inspect($0)'
+  'IO.puts':
+    'prefix': 'ip'
+    'body': 'IO.puts($0)'
   'test':
     'prefix': 'test'
     'body': 'test "$1" do\n\t$0\nend'

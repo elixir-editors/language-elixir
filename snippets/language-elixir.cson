@@ -56,6 +56,12 @@
   'test':
     'prefix': 'test'
     'body': 'test "$1" do\n\t$0\nend'
+  'Logger.debug':
+    'prefix': 'deb'
+    'body': 'Logger.debug "$0"'
+  'Logger.debug inspect':
+    'prefix': 'debi'
+    'body': 'Logger.debug "\#{inspect $0}"'
 '.text.elixir':
   '<% inline %>':
     'prefix': '%'

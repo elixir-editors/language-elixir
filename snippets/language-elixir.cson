@@ -23,12 +23,12 @@
   'defstruct':
     'prefix': 'defstruct'
     'body': 'defstruct [$1]'
-  'do':
-    'prefix': 'do'
-    'body': 'do\n\t$0\nend'
   'doc':
     'prefix': 'doc'
     'body': '@doc """\n$0\n"""'
+  'do':
+    'prefix': 'do'
+    'body': 'do\n\t$0\nend'
   'for':
     'prefix': 'for'
     'body': 'for $1 <- $2 do\n\t$3\nend'

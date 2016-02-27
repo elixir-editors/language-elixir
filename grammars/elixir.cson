@@ -234,7 +234,85 @@
     ]
   }
   {
-    'begin': '~[a-z]\\{'
+    'comment': 'Regex sigil with curlies'
+    'begin': '~r\\{'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\}[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+      { 'include': '#nest_curly' }
+    ]
+  }
+  {
+    'comment': 'Regex sigil with parens'
+    'begin': '~r\\('
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\)[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+    ]
+  }
+  {
+    'comment': 'Regex sigil with slashes'
+    'begin': '~r\\/'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\/[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+    ]
+  }
+  {
+    'comment': 'Regex sigil with brackets'
+    'begin': '~r\\['
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\][eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+      { 'include': '#nest_brackets' }
+    ]
+  }
+  {
+    'comment': 'Regex sigil with ltgt'
+    'begin': '~r\\<'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\>[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+  {
+    'begin': '~[a-qs-z]\\{'
     'beginCaptures':
       '0':
         'name': 'punctuation.definition.string.begin.elixir'
@@ -647,6 +725,7 @@
       }
     ]
   'regex_sub':
+    'name': 'string.interpolated.regexp.elixir'
     'patterns': [
       {
         'include': '#interpolated_elixir'
@@ -655,21 +734,21 @@
         'include': '#escaped_char'
       }
       {
+        'name': 'string.regexp.arbitrary-repitition.elixir'
+        'match': '(\\{)\\d+(,\\d+)?(\\})'
         'captures':
           '1':
             'name': 'punctuation.definition.arbitrary-repitition.elixir'
           '3':
             'name': 'punctuation.definition.arbitrary-repitition.elixir'
-        'match': '(\\{)\\d+(,\\d+)?(\\})'
-        'name': 'string.regexp.arbitrary-repitition.elixir'
       }
       {
+        'name': 'string.regexp.character-class.elixir'
         'begin': '\\[(?:\\^?\\])?'
+        'end': '\\]'
         'captures':
           '0':
             'name': 'punctuation.definition.character-class.elixir'
-        'end': '\\]'
-        'name': 'string.regexp.character-class.elixir'
         'patterns': [
           {
             'include': '#escaped_char'

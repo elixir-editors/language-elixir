@@ -86,20 +86,6 @@
     'name': 'variable.language.elixir'
   }
   {
-    'captures':
-      '1':
-        'name': 'punctuation.definition.variable.elixir'
-    'match': '(@)[a-zA-Z_]\\w*'
-    'name': 'variable.other.readwrite.module.elixir'
-  }
-  {
-    'captures':
-      '1':
-        'name': 'punctuation.definition.variable.elixir'
-    'match': '(&)\\d*'
-    'name': 'variable.other.anonymous.elixir'
-  }
-  {
     'match': '\\b[A-Z]\\w*\\b'
     'name': 'variable.other.constant.elixir'
   }
@@ -451,14 +437,6 @@
       '1':
         'name': 'punctuation.definition.constant.elixir'
     'comment': 'symbols'
-    'match': '(?<!:)(:)(?>[a-zA-Z_][\\w@]*(?>[?!]|=(?![>=]))?|\\<\\>|===?|!==?|<<>>|<<<|>>>|~~~|::|<\\-|\\|>|=>|~|~=|=|/|\\\\\\\\|\\*\\*?|\\.\\.?\\.?|>=?|<=?|&&?&?|\\+\\+?|\\-\\-?|\\|\\|?\\|?|\\!|@|\\%?\\{\\}|%|\\[\\]|\\^(\\^\\^)?)'
-    'name': 'constant.other.symbol.elixir'
-  }
-  {
-    'captures':
-      '1':
-        'name': 'punctuation.definition.constant.elixir'
-    'comment': 'symbols'
     'match': '(?>[a-zA-Z_][\\w@]*(?>[?!])?)(:)(?!:)'
     'name': 'constant.other.symbol.elixir'
   }
@@ -515,21 +493,17 @@
     ]
   }
   {
-    'comment': 'matches: | ++ -- ** \\ <- <> << >> :: .. |> ~ => ->'
-    'match': '\\+\\+|\\-\\-|\\*\\*|\\\\\\\\|\\<\\-|\\<\\>|\\<\\<|\\>\\>|\\:\\:|\\.\\.|\\|>|~|=>|->|\\|'
+    'match': '(\\|\\|\\||&&&|\\^\\^\\^|<<<|>>>|~~~)'
+    'name': 'keyword.operator.bitwise.elixir'
+  }
+  {
+    'comment': 'matches: | ++ -- ** \\ <- <> << >> :: .. |> => -> <|> <~> <~ <<~ ~> ~>>'
+    'match': '\\+\\+|\\-\\-|\\*\\*|\\\\\\\\|\\<\\-|<\\<\\~|\\<\\>|\\<\\<|\\>\\>|\\:\\:|\\.\\.|\\|>|=>|<\\|\\>|<~>|->|~>>|~>|<~'
     'name': 'keyword.operator.other.elixir'
   }
   {
-    'match': '\\+=|\\-=|\\|\\|=|~=|&&='
-    'name': 'keyword.operator.assignment.augmented.elixir'
-  }
-  {
-    'match': '===?|!==?|<=?|>=?'
+    'match': '===?|!==?|<=?|>=?|=~'
     'name': 'keyword.operator.comparison.elixir'
-  }
-  {
-    'match': '(\\|\\|\\||&&&|\\^\\^\\^|<<<|>>>|~~~)'
-    'name': 'keyword.operator.bitwise.elixir'
   }
   {
     'match': '(?<=[ \\t])!+|\\bnot\\b|&&|\\band\\b|\\|\\||\\bor\\b|\\bxor\\b'
@@ -564,12 +538,34 @@
     'name': 'punctuation.section.scope.elixir'
   }
   {
-    'match': '\\[|\\]'
+    'match': '\\[\\]|\\[|\\]'
     'name': 'punctuation.section.array.elixir'
   }
   {
     'match': '\\(|\\)'
     'name': 'punctuation.section.function.elixir'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.variable.elixir'
+    'match': '(@)[a-zA-Z_]\\w*'
+    'name': 'variable.other.readwrite.module.elixir'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.variable.elixir'
+    'match': '(&)\\d*'
+    'name': 'variable.other.anonymous.elixir'
+  }
+  {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.constant.elixir'
+    'comment': 'symbols'
+    'match': '(?<!:)(:)(?>[a-zA-Z_][\\w@]*(?>[?!]|=(?![>=]))?|\\<\\>|===?|!==?|<<>>|<<<|>>>|~~~|::|<\\-|\\|>|=>|~|~=|=|/|\\\\\\\\|\\*\\*?|\\.\\.?\\.?|>=?|<=?|&&?&?|\\+\\+?|\\-\\-?|\\|\\|?\\|?|\\!|@|\\%?\\{\\}|%|\\[\\]|\\^(\\^\\^)?)'
+    'name': 'constant.other.symbol.elixir'
   }
 ]
 'repository':

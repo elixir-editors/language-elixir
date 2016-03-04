@@ -21,7 +21,7 @@
     'begin': '@(module|type)?doc (~[a-z])?"""'
     'comment': '@doc with heredocs is treated as documentation'
     'end': '\\s*"""'
-    'name': 'comment.documentation.heredoc'
+    'name': 'comment.documentation.heredoc.elixir'
     'patterns': [
       {
         'include': '#interpolated_elixir'
@@ -35,7 +35,7 @@
     'begin': '@(module|type)?doc ~[A-Z]"""'
     'comment': '@doc with heredocs is treated as documentation'
     'end': '\\s*"""'
-    'name': 'comment.documentation.heredoc'
+    'name': 'comment.documentation.heredoc.elixir'
   }
   {
     'comment': '@doc false is treated as documentation'

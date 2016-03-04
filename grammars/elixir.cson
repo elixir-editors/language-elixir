@@ -518,10 +518,6 @@
     'name': 'keyword.operator.assignment.elixir'
   }
   {
-    'match': ':'
-    'name': 'punctuation.separator.other.elixir'
-  }
-  {
     'match': '\\;'
     'name': 'punctuation.separator.statement.elixir'
   }
@@ -566,6 +562,10 @@
     'comment': 'symbols'
     'match': '(?<!:)(:)(?>[a-zA-Z_][\\w@]*(?>[?!]|=(?![>=]))?|\\<\\>|===?|!==?|<<>>|<<<|>>>|~~~|::|<\\-|\\|>|=>|~|~=|=|/|\\\\\\\\|\\*\\*?|\\.\\.?\\.?|>=?|<=?|&&?&?|\\+\\+?|\\-\\-?|\\|\\|?\\|?|\\!|@|\\%?\\{\\}|%|\\[\\]|\\^(\\^\\^)?)'
     'name': 'constant.other.symbol.elixir'
+  }
+  {
+    'match': ':'
+    'name': 'punctuation.separator.other.elixir'
   }
 ]
 'repository':

@@ -441,10 +441,11 @@
     'name': 'constant.other.symbol.elixir'
   }
   {
-    'captures':
-      '1':
+    'begin': '#'
+    'beginCaptures':
+      '0':
         'name': 'punctuation.definition.comment.elixir'
-    'match': '(?:^[ \\t]+)?(#).*$\\n?'
+    'end': '\\n'
     'name': 'comment.line.number-sign.elixir'
   }
   {
@@ -706,11 +707,15 @@
         ]
       }
       {
-        'captures':
+        'begin': '(?<=^|\\s)(#)\\s(?=[[a-zA-Z0-9,. \\t?!-][^\\x{00}-\\x{7F}]]*$)'
+        'beginCaptures':
           '1':
             'name': 'punctuation.definition.comment.elixir'
         'comment': 'We are restrictive in what we allow to go after the comment character to avoid false positives, since the availability of comments depend on regexp flags.'
-        'match': '(?<=^|\\s)(#)\\s[[a-zA-Z0-9,. \\t?!-][^\\x{00}-\\x{7F}]]*$'
+        'end': '$\\n?'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.definition.comment.elixir'
         'name': 'comment.line.number-sign.elixir'
       }
     ]

@@ -477,23 +477,6 @@
     'name': 'constant.numeric.elixir'
   }
   {
-    'begin': '(?<=\\{|do|\\{\\s|do\\s)(\\|)'
-    'captures':
-      '1':
-        'name': 'punctuation.separator.variable.elixir'
-    'end': '(\\|)'
-    'patterns': [
-      {
-        'match': '[_a-zA-Z][_a-zA-Z0-9]*'
-        'name': 'variable.other.block.elixir'
-      }
-      {
-        'match': ','
-        'name': 'punctuation.separator.variable.elixir'
-      }
-    ]
-  }
-  {
     'match': '(\\|\\|\\||&&&|\\^\\^\\^|<<<|>>>|~~~)'
     'name': 'keyword.operator.bitwise.elixir'
   }

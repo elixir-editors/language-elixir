@@ -132,6 +132,10 @@ describe "Elixir grammar", ->
     expect(tokens[3]).toEqual value: ':', scopes: ['source.elixir', 'constant.other.symbol.elixir', 'punctuation.definition.constant.elixir']
     expect(tokens[4]).toEqual value: 'erlang', scopes: ['source.elixir', 'constant.other.symbol.elixir']
 
+    {tokens} = grammar.tokenizeLine('case: case')
+    expect(tokens[0]).toEqual value: 'case', scopes: ['source.elixir', 'constant.other.symbol.elixir']
+    expect(tokens[1]).toEqual value: ':', scopes: ['source.elixir', 'constant.other.symbol.elixir', 'punctuation.definition.constant.elixir']
+
   it "tokenizes comments", ->
     {tokens} = grammar.tokenizeLine("# TODO: stuff")
     expect(tokens[0]).toEqual value: '#', scopes: ['source.elixir', 'comment.line.number-sign.elixir', 'punctuation.definition.comment.elixir']

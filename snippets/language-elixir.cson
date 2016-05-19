@@ -25,7 +25,7 @@
     'body': 'defstruct [$1]'
   'doc':
     'prefix': 'doc'
-    'body': '@doc """\n$0\n"""'
+    'body': '@doc """\n\b\b${0:documentation}\n"""'
   'do':
     'prefix': 'do'
     'body': 'do\n\t$0\nend'
@@ -41,9 +41,12 @@
   'inline defp':
     'prefix': 'idefp'
     'body': 'defp $1, do: $2'
-  'moduledoc':
+  'mdoc':
     'prefix': 'mdoc'
-    'body': '@moduledoc """\n$0\n"""'
+    'body': '@moduledoc """\n\b\b${0:documentation}\n"""'
+  'moduledoc':
+    'prefix': 'moduledoc'
+    'body': '@moduledoc """\n\b\b${0:documentation}\n"""'
   'defprotocol':
     'prefix': 'defpro'
     'body': 'defprotocol $1 do\n\t$0\nend'

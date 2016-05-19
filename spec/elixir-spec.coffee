@@ -254,6 +254,71 @@ describe "Elixir grammar", ->
     expect(tokens[1]).toEqual value: 'test #{foo}', scopes: ['source.elixir', 'string.regexp.literal.elixir']
     expect(tokens[2]).toEqual value: '\'', scopes: ['source.elixir', 'string.regexp.literal.elixir', 'punctuation.section.regexp.end.elixir']
 
+  it "tokenizes interpolated character lists", ->
+    {tokens} = grammar.tokenizeLine('~c(test #{foo})')
+    expect(tokens[0]).toEqual value: '~c(', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'test ', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
+    expect(tokens[2]).toEqual value: '#{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[3]).toEqual value: 'foo', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source']
+    expect(tokens[4]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[5]).toEqual value: ')', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
+
+    {tokens} = grammar.tokenizeLine('~c/test #{foo}/')
+    expect(tokens[0]).toEqual value: '~c/', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'test ', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
+    expect(tokens[2]).toEqual value: '#{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[3]).toEqual value: 'foo', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source']
+    expect(tokens[4]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[5]).toEqual value: '/', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
+
+    {tokens} = grammar.tokenizeLine('~c[test #{foo}]')
+    expect(tokens[0]).toEqual value: '~c[', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'test ', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
+    expect(tokens[2]).toEqual value: '#{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[3]).toEqual value: 'foo', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source']
+    expect(tokens[4]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[5]).toEqual value: ']', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
+
+    {tokens} = grammar.tokenizeLine('~c{test #{foo}}')
+    expect(tokens[0]).toEqual value: '~c{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'test ', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
+    expect(tokens[2]).toEqual value: '#{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[3]).toEqual value: 'foo', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source']
+    expect(tokens[4]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[5]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
+
+    {tokens} = grammar.tokenizeLine('~c<test #{foo}>')
+    expect(tokens[0]).toEqual value: '~c<', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'test ', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
+    expect(tokens[2]).toEqual value: '#{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[3]).toEqual value: 'foo', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source']
+    expect(tokens[4]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[5]).toEqual value: '>', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
+
+    {tokens} = grammar.tokenizeLine('~c"test #{foo}"')
+    expect(tokens[0]).toEqual value: '~c"', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'test ', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
+    expect(tokens[2]).toEqual value: '#{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[3]).toEqual value: 'foo', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source']
+    expect(tokens[4]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[5]).toEqual value: '"', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
+
+    {tokens} = grammar.tokenizeLine('~c\'test #{foo}\'')
+    expect(tokens[0]).toEqual value: '~c\'', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'test ', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
+    expect(tokens[2]).toEqual value: '#{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[3]).toEqual value: 'foo', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source']
+    expect(tokens[4]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[5]).toEqual value: '\'', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
+
+    {tokens} = grammar.tokenizeLine('~c|test #{foo}|')
+    expect(tokens[0]).toEqual value: '~c|', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'test ', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
+    expect(tokens[2]).toEqual value: '#{', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[3]).toEqual value: 'foo', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source']
+    expect(tokens[4]).toEqual value: '}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'source.elixir.embedded.source', 'punctuation.section.embedded.elixir']
+    expect(tokens[5]).toEqual value: '|', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
+
   it "does not tokenize sigils with improper delimiters", ->
     {tokens} = grammar.tokenizeLine('~r.test.')
     expect(tokens[0]).toEqual value: '~r', scopes: ['source.elixir']

@@ -479,6 +479,143 @@
     ]
   }
 
+  # TODO: Interpolated Charater lists sigils
+  {
+    'comment': 'Character list sigil with curlies'
+    'begin': '~c\\{'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\}[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with pipes'
+    'begin': '~c\\|'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\|[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with parens'
+    'begin': '~c\\('
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\)[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with curlies'
+    'begin': '~c\\<'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\>[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with curlies'
+    'begin': '~c\\['
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\][a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with curlies'
+    'begin': "~c\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': "\\'[a-z]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with curlies'
+    'begin': '~c\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\"[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with curlies'
+    'begin': '~c\\/'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\/[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+
+
+  # TODO: Literal Charater lists sigils
+  # TODO: Interpolated String sigils
+  # TODO: Literal String sigils
+  # TODO: Interpolated word lists
+  # TODO: Literal word lists
+
 
   # User defined sigils
   {

@@ -213,6 +213,8 @@
       }
     ]
   }
+
+  # TODO: I think this is a duplicate
   {
     'begin': '~[a-z](?>""")'
     'beginCaptures':
@@ -233,6 +235,8 @@
       }
     ]
   }
+
+  # Interpolated Regex Sigils
   {
     'comment': 'Regex sigil with curlies'
     'begin': '~r\\{'
@@ -247,6 +251,21 @@
     'patterns': [
       { 'include': '#regex_sub' }
       { 'include': '#nest_curly' }
+    ]
+  }
+  {
+    'comment': 'Regex sigil with pipes'
+    'begin': '~r\\|'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\|[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
     ]
   }
   {
@@ -312,7 +331,158 @@
     ]
   }
   {
-    'begin': '~[a-qs-z]\\{'
+    'comment': 'Regex sigil with double quotes'
+    'begin': '~r\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\"[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+  {
+    'comment': 'Regex sigil with single quotes'
+    'begin': "~r\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': "\\'[eimnosux]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+
+  # Literal Regex Sigils
+  {
+    'comment': 'Literal regex sigil with curlies'
+    'begin': '~R\\{'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\}[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+    'patterns': [
+      { 'include': '#nest_curly' }
+    ]
+  }
+  {
+    'comment': 'Literal regex sigil with pipes'
+    'begin': '~R\\|'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\|[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+  }
+  {
+    'comment': 'Literal regex sigil with parens'
+    'begin': '~R\\('
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\)[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+    'patterns': [
+      { 'include': '#nest_parens'}
+    ]
+  }
+  {
+    'comment': 'Literal regex sigil with slashes'
+    'begin': '~R\\/'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\/[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+  }
+  {
+    'comment': 'Literal regex sigil with brackets'
+    'begin': '~R\\['
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\][eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+    'patterns': [
+      { 'include': '#nest_brackets' }
+    ]
+  }
+  {
+    'comment': 'Literal regex sigil with ltgt'
+    'begin': '~R\\<'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\>[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+    'patterns': [
+      { 'include': '#nest_ltgt'}
+    ]
+  }
+  {
+    'comment': 'Literal regex sigil with double quotes'
+    'begin': '~R\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\"[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+    'patterns': [
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+  {
+    'comment': 'Literal regex sigil with single quotes'
+    'begin': "~R\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': "\\'[eimnosux]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+    'patterns': [
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+
+
+  # User defined sigils
+  {
+    'begin': '~[a-z]\\{'
     'beginCaptures':
       '0':
         'name': 'punctuation.definition.string.begin.elixir'
@@ -403,29 +573,7 @@
       }
     ]
   }
-  {
-    'begin': '~[a-z]([^\\w])'
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.definition.string.begin.elixir'
-    'comment': 'sigil (allow for interpolation)'
-    'end': '\\1[a-z]*'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.definition.string.end.elixir'
-    'name': 'string.interpolated.elixir'
-    'patterns': [
-      {
-        'include': '#interpolated_elixir'
-      }
-      {
-        'include': '#escaped_char'
-      }
-      {
-        'include': '#escaped_char'
-      }
-    ]
-  }
+
   {
     'begin': '~[A-Z](?>""")'
     'beginCaptures':
@@ -518,6 +666,7 @@
         'name': 'punctuation.definition.string.end.elixir'
     'name': 'string.quoted.other.literal.upper.elixir'
   }
+
   {
     'begin': '#'
     'beginCaptures':
@@ -579,6 +728,7 @@
     'match': '='
     'name': 'keyword.operator.assignment.elixir'
   }
+  # TODO: Do we need this?
   {
     'match': '\\;'
     'name': 'punctuation.separator.statement.elixir'

@@ -61,6 +61,14 @@
     'name': 'keyword.other.special-method.elixir'
   }
   {
+    'captures':
+      '1':
+        'name': 'punctuation.definition.constant.elixir'
+    'comment': 'symbols'
+    'match': '(?>[a-zA-Z_][\\w@]*(?>[?!])?)(:)(?!:)'
+    'name': 'constant.other.symbol.elixir'
+  }
+  {
     'match': '(?<!\\.)\\b(do|end|case|bc|lc|for|if|cond|with|unless|try|receive|fn|defmodule|defprotocol|defimpl|defrecord|defstruct|defdelegate|defcallback|defexception|defoverridable|exit|after|rescue|catch|else|raise|throw|quote|unquote|super|when)\\b(?![?!])'
     'name': 'keyword.control.elixir'
   }
@@ -431,14 +439,6 @@
       '0':
         'name': 'punctuation.definition.string.end.elixir'
     'name': 'string.quoted.other.literal.upper.elixir'
-  }
-  {
-    'captures':
-      '1':
-        'name': 'punctuation.definition.constant.elixir'
-    'comment': 'symbols'
-    'match': '(?>[a-zA-Z_][\\w@]*(?>[?!])?)(:)(?!:)'
-    'name': 'constant.other.symbol.elixir'
   }
   {
     'begin': '#'

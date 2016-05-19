@@ -1,4 +1,7 @@
 '.source.elixir':
+  'callback':
+    'prefix': 'callback'
+    'body': '@callback ${1:function_name}($2) :: ${3:type}'
   'case':
     'prefix': 'case'
     'body': 'case $1 do\n\t$0\nend'
@@ -59,15 +62,21 @@
   'IO.puts':
     'prefix': 'ip'
     'body': 'IO.puts($0)'
-  'test':
-    'prefix': 'test'
-    'body': 'test "$1" do\n\t$0\nend'
   'Logger.debug':
     'prefix': 'deb'
     'body': 'Logger.debug "$0"'
   'Logger.debug inspect':
     'prefix': 'debi'
     'body': 'Logger.debug "\#{inspect $0}"'
+  'spec':
+    'prefix': 'spec'
+    'body': '@spec ${1:function_name}($2) :: ${3:type}'
+  'test':
+    'prefix': 'test'
+    'body': 'test "$1" do\n\t$0\nend'
+  'type':
+    'prefix': 'type'
+    'body': '@type ${1:type_name} :: ${2:type}'
 '.text.elixir':
   '<% inline %>':
     'prefix': '%'

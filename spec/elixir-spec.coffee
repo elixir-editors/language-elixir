@@ -136,3 +136,7 @@ describe "Elixir grammar", ->
     {tokens} = grammar.tokenizeLine("# TODO: stuff")
     expect(tokens[0]).toEqual value: '#', scopes: ['source.elixir', 'comment.line.number-sign.elixir', 'punctuation.definition.comment.elixir']
     expect(tokens[1]).toEqual value: ' TODO: stuff', scopes: ['source.elixir', 'comment.line.number-sign.elixir']
+
+  it "tokenizes do's", ->
+    {tokens} = grammar.tokenizeLine("do")
+    expect(tokens[0]).toEqual value: 'do', scopes: ['source.elixir', 'keyword.control.elixir']

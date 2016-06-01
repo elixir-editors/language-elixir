@@ -12,6 +12,13 @@ describe "Elixir grammar", ->
     expect(grammar).toBeTruthy()
     expect(grammar.scopeName).toBe "source.elixir"
 
+  it "tokenizes underscore variables as comments", ->
+    {tokens} = grammar.tokenizeLine('_some_variable')
+    expect(tokens[0]).toEqual value: '_some_variable', scopes: ['source.elixir', 'comment.elixir']
+
+    {tokens} = grammar.tokenizeLine('some_variable')
+    expect(tokens[0]).toEqual value: 'some_variable', scopes: ['source.elixir']
+
   it "tokenizes bitwise operators", ->
     {tokens} = grammar.tokenizeLine('left &&& right')
     expect(tokens[1]).toEqual value: '&&&', scopes: ['source.elixir', 'keyword.operator.bitwise.elixir']

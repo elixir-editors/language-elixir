@@ -1215,6 +1215,10 @@
     'name': 'comment.line.number-sign.elixir'
   }
   {
+    'match': '\\b_(\\w*)'
+    'name': 'comment.elixir'
+  }
+  {
     'comment': """
 			matches questionmark-letters.
 

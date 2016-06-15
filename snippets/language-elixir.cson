@@ -102,3 +102,6 @@
   'for':
     'prefix': 'for'
     'body': '<%= for ${1:el} <- ${2:list} do %>\n\t$0\n<% end %>'
+  'fn':
+   'prefix': 'fn'
+   'body': 'fn($1) -> ${2:...} end'

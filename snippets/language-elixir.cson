@@ -80,6 +80,9 @@
   'typedoc':
     'prefix': 'typedoc'
     'body': '@typedoc """\n\b\b${0:documentation}\n"""'
+  'fn':
+    'prefix': 'fn'
+    'body': 'fn($1) -> ${2:...} end'
 '.text.elixir':
   '<% inline %>':
     'prefix': '%'

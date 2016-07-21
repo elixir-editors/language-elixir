@@ -17,9 +17,11 @@
     'match': '^\\s*(defmodule)\\s+(([A-Z]\\w*\\s*(\\.)\\s*)*[A-Z]\\w*)'
     'name': 'meta.module.elixir'
   }
+
+  # Docs - Heredoc Interpolated
   {
-    'begin': '@(module|type)?doc (~[a-z])?"""'
-    'comment': '@doc with heredocs is treated as documentation'
+    'begin': '@(module|type)?doc (~s)?"""'
+    'comment': '@doc with interpolated heredocs'
     'end': '\\s*"""'
     'name': 'comment.documentation.heredoc.elixir'
     'patterns': [
@@ -32,16 +34,52 @@
     ]
   }
   {
-    'begin': '@(module|type)?doc ~[A-Z]"""'
+    'begin': "@(module|type)?doc ~s'''"
+    'comment': '@doc with interpolated single quoted heredocs'
+    'end': "\\s*'''"
+    'name': 'comment.documentation.heredoc.elixir'
+    'patterns': [
+      {
+        'include': '#interpolated_elixir'
+      }
+      {
+        'include': '#escaped_char'
+      }
+    ]
+  }
+
+  # Docs - Heredoc Literal
+  {
+    'begin': '@(module|type)?doc ~S"""'
     'comment': '@doc with heredocs is treated as documentation'
     'end': '\\s*"""'
     'name': 'comment.documentation.heredoc.elixir'
+    'patterns': [
+      {
+        'include': '#escaped_char'
+      }
+    ]
   }
+  {
+    'begin': "@(module|type)?doc ~S'''"
+    'comment': '@doc with heredocs is treated as documentation'
+    'end': "\\s*'''"
+    'name': 'comment.documentation.heredoc.elixir'
+    'patterns': [
+      {
+        'include': '#escaped_char'
+      }
+    ]
+  }
+
+  # Docs - False
   {
     'comment': '@doc false is treated as documentation'
     'match': '@(module|type)?doc false'
     'name': 'comment.documentation.false'
   }
+
+  # Docs - Non-heredoc strings
   {
     'begin': '@(module|type)?doc "'
     'comment': '@doc with string is treated as documentation'
@@ -56,10 +94,13 @@
       }
     ]
   }
+
+  # Special methods - Imports, Aliases, Requires
   {
     'match': '(?<!\\.)\\b(alias|require|import|use)\\b(?![?!])'
     'name': 'keyword.other.special-method.elixir'
   }
+
   {
     'captures':
       '1':
@@ -100,118 +141,6 @@
   {
     'match': '\\b(0[xX]\\h(?>_?\\h)*|\\d(?>_?\\d)*(\\.(?![^[:space:][:digit:]])(?>_?\\d)*)?([eE][-+]?\\d(?>_?\\d)*)?|0[bB][01]+)\\b'
     'name': 'constant.numeric.elixir'
-  }
-  {
-    'begin': ':\''
-    'captures':
-      '0':
-        'name': 'punctuation.definition.constant.elixir'
-    'end': '\''
-    'name': 'constant.other.symbol.single-quoted.elixir'
-    'patterns': [
-      {
-        'include': '#interpolated_elixir'
-      }
-      {
-        'include': '#escaped_char'
-      }
-    ]
-  }
-  {
-    'begin': ':"'
-    'captures':
-      '0':
-        'name': 'punctuation.definition.constant.elixir'
-    'end': '"'
-    'name': 'constant.other.symbol.double-quoted.elixir'
-    'patterns': [
-      {
-        'include': '#interpolated_elixir'
-      }
-      {
-        'include': '#escaped_char'
-      }
-    ]
-  }
-  {
-    'begin': '(?>\'\'\')'
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.definition.string.begin.elixir'
-    'comment': 'Single-quoted heredocs'
-    'end': '^\\s*\'\'\''
-    'endCaptures':
-      '0':
-        'name': 'punctuation.definition.string.end.elixir'
-    'name': 'support.function.variable.quoted.single.heredoc.elixir'
-    'patterns': [
-      {
-        'include': '#interpolated_elixir'
-      }
-      {
-        'include': '#escaped_char'
-      }
-    ]
-  }
-  {
-    'begin': '\''
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.definition.string.begin.elixir'
-    'comment': 'single quoted string (allows for interpolation)'
-    'end': '\''
-    'endCaptures':
-      '0':
-        'name': 'punctuation.definition.string.end.elixir'
-    'name': 'support.function.variable.quoted.single.elixir'
-    'patterns': [
-      {
-        'include': '#interpolated_elixir'
-      }
-      {
-        'include': '#escaped_char'
-      }
-    ]
-  }
-  {
-    'begin': '(?>""")'
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.definition.string.begin.elixir'
-    'comment': 'Double-quoted heredocs'
-    'end': '^\\s*"""'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.definition.string.end.elixir'
-    'name': 'string.quoted.double.heredoc.elixir'
-    'patterns': [
-      {
-        'include': '#interpolated_elixir'
-      }
-      {
-        'include': '#escaped_char'
-      }
-    ]
-  }
-  {
-    'begin': '"'
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.definition.string.begin.elixir'
-    'comment': 'double quoted string (allows for interpolation)'
-    'end': '"'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.definition.string.end.elixir'
-    'name': 'string.quoted.double.elixir'
-    'patterns': [
-      {
-        'include': '#interpolated_elixir'
-      }
-      {
-        'include': '#escaped_char'
-      }
-    ]
   }
 
   # Interpolated Regex Sigils
@@ -299,6 +228,38 @@
       '0':
         'name': 'punctuation.section.regexp.begin.elixir'
     'end': '\\>[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+  {
+    'comment': 'Regex sigil with single quoted heredocs'
+    'begin': "~r\\'\\'\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': "\\'\\'\\'[eimnosux]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.interpolated.elixir'
+    'patterns': [
+      { 'include': '#regex_sub' }
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+  {
+    'comment': 'Regex sigil with single quotes'
+    'begin': '~r\\"\\"\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\"\\"\\"[eimnosux]*'
     'endCaptures':
       '0':
         'name': 'punctuation.section.regexp.end.elixir'
@@ -427,6 +388,36 @@
     ]
   }
   {
+    'comment': 'Literal regex sigil with single quoted heredoc'
+    'begin': "~R\\'\\'\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': "\\'\\'\\'[eimnosux]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+    'patterns': [
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+  {
+    'comment': 'Literal regex sigil with double quoted heredoc'
+    'begin': '~R\\"\\"\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.begin.elixir'
+    'end': '\\"\\"\\"[eimnosux]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.regexp.end.elixir'
+    'name': 'string.regexp.literal.elixir'
+    'patterns': [
+      { 'include': '#nest_ltgt' }
+    ]
+  }
+  {
     'comment': 'Literal regex sigil with double quotes'
     'begin': '~R\\"'
     'beginCaptures':
@@ -540,6 +531,54 @@
   }
   {
     'comment': 'Character list sigil with curlies'
+    'begin': '~c\\/'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\/[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with single quoted heredoc'
+    'begin': "~c\\'\\'\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': "\\'\\'\\'[a-z]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with double quoted heredoc'
+    'begin': '~c\\"\\"\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\"\\"\\"[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Character list sigil with curlies'
     'begin': "~c\\'"
     'beginCaptures':
       '0':
@@ -561,22 +600,6 @@
       '0':
         'name': 'punctuation.definition.string.begin.elixir'
     'end': '\\"[a-z]*'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.definition.string.end.elixir'
-    'name': 'support.function.variable.quoted.single.elixir'
-    'patterns': [
-      { 'include': '#interpolated_elixir' }
-      { 'include': '#escaped_char' }
-    ]
-  }
-  {
-    'comment': 'Character list sigil with curlies'
-    'begin': '~c\\/'
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.definition.string.begin.elixir'
-    'end': '\\/[a-z]*'
     'endCaptures':
       '0':
         'name': 'punctuation.definition.string.end.elixir'
@@ -650,6 +673,42 @@
   }
   {
     'comment': 'Literal Character list sigil with curlies'
+    'begin': '~C\\/'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\/[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+  }
+  {
+    'comment': 'Literal Character list sigil with single quoted heredoc'
+    'begin': "~C\\'\\'\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': "\\'\\'\\'[a-z]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+  }
+  {
+    'comment': 'Literal Character list sigil with double quoted heredoc'
+    'begin': '~C\\"\\"\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'end': '\\"\\"\\"[a-z]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+  }
+  {
+    'comment': 'Literal Character list sigil with curlies'
     'begin': "~C\\'"
     'beginCaptures':
       '0':
@@ -667,18 +726,6 @@
       '0':
         'name': 'punctuation.definition.string.begin.elixir'
     'end': '\\"[a-z]*'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.definition.string.end.elixir'
-    'name': 'support.function.variable.quoted.single.elixir'
-  }
-  {
-    'comment': 'Literal Character list sigil with curlies'
-    'begin': '~C\\/'
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.definition.string.begin.elixir'
-    'end': '\\/[a-z]*'
     'endCaptures':
       '0':
         'name': 'punctuation.definition.string.end.elixir'
@@ -771,6 +818,54 @@
     ]
   }
   {
+    'begin': '~w\\|'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.list.begin.elixir'
+    'comment': 'sigil (allow for interpolation)'
+    'end': '\\|[acs]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.list.end.elixir'
+    'name': 'string.quoted.double.interpolated.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Interpolated word list sigil with single quoted heredoc'
+    'begin': "~w\\'\\'\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.list.begin.elixir'
+    'end': "\\'\\'\\'[acs]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.list.end.elixir'
+    'name': 'string.quoted.double.interpolated.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
+    'comment': 'Interpolated word list sigil with double quoted heredoc'
+    'begin': '~w\\"\\"\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.list.begin.elixir'
+    'end': '\\"\\"\\"[acs]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.list.end.elixir'
+    'name': 'string.quoted.double.interpolated.elixir'
+    'patterns': [
+      { 'include': '#interpolated_elixir' }
+      { 'include': '#escaped_char' }
+    ]
+  }
+  {
     'begin': "~w\\'"
     'beginCaptures':
       '0':
@@ -793,22 +888,6 @@
         'name': 'punctuation.section.list.begin.elixir'
     'comment': 'sigil (allow for interpolation)'
     'end': '\\"[acs]*'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.section.list.end.elixir'
-    'name': 'string.quoted.double.interpolated.elixir'
-    'patterns': [
-      { 'include': '#interpolated_elixir' }
-      { 'include': '#escaped_char' }
-    ]
-  }
-  {
-    'begin': '~w\\|'
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.section.list.begin.elixir'
-    'comment': 'sigil (allow for interpolation)'
-    'end': '\\|[acs]*'
     'endCaptures':
       '0':
         'name': 'punctuation.section.list.end.elixir'
@@ -890,6 +969,42 @@
     'name': 'string.quoted.double.literal.elixir'
   }
   {
+    'begin': '~W\\|'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.list.begin.elixir'
+    'comment': 'sigil (without interpolation)'
+    'end': '\\|[acs]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.list.end.elixir'
+    'name': 'string.quoted.double.literal.elixir'
+  }
+  {
+    'comment': 'Literal word list sigil with single quoted heredoc'
+    'begin': "~W\\'\\'\\'"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.list.begin.elixir'
+    'end': "\\'\\'\\'[acs]*"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.list.end.elixir'
+    'name': 'string.quoted.double.literal.elixir'
+  }
+  {
+    'comment': 'Literal word list sigil with double quoted heredoc'
+    'begin': '~W\\"\\"\\"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.section.list.begin.elixir'
+    'end': '\\"\\"\\"[acs]*'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.section.list.end.elixir'
+    'name': 'string.quoted.double.literal.elixir'
+  }
+  {
     'begin': "~W\\'"
     'beginCaptures':
       '0':
@@ -913,18 +1028,6 @@
         'name': 'punctuation.section.list.end.elixir'
     'name': 'string.quoted.double.literal.elixir'
   }
-  {
-    'begin': '~W\\|'
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.section.list.begin.elixir'
-    'comment': 'sigil (without interpolation)'
-    'end': '\\|[acs]*'
-    'endCaptures':
-      '0':
-        'name': 'punctuation.section.list.end.elixir'
-    'name': 'string.quoted.double.literal.elixir'
-  }
 
   # Interpolated String sigils
   {
@@ -934,6 +1037,26 @@
         'name': 'punctuation.definition.string.begin.elixir'
     'comment': 'Double-quoted heredocs sigils'
     'end': '^\\s*"""'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'string.quoted.double.heredoc.elixir'
+    'patterns': [
+      {
+        'include': '#interpolated_elixir'
+      }
+      {
+        'include': '#escaped_char'
+      }
+    ]
+  }
+  {
+    'begin': "~[a-z](?>''')"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'comment': 'Double-quoted heredocs sigils'
+    'end': "^\\s*'''"
     'endCaptures':
       '0':
         'name': 'punctuation.definition.string.end.elixir'
@@ -1100,6 +1223,18 @@
     'name': 'string.quoted.other.literal.elixir'
   }
   {
+    'begin': "~[A-Z](?>''')"
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'comment': 'Double-quoted heredocs sigils'
+    'end': "^\\s*'''"
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'string.quoted.other.literal.elixir'
+  }
+  {
     'begin': '~[A-Z]\\{'
     'beginCaptures':
       '0':
@@ -1203,6 +1338,120 @@
       '0':
         'name': 'punctuation.definition.string.end.elixir'
     'name': 'string.quoted.double.literal.elixir'
+  }
+
+  # Punctuation
+  {
+    'begin': ':\''
+    'captures':
+      '0':
+        'name': 'punctuation.definition.constant.elixir'
+    'end': '\''
+    'name': 'constant.other.symbol.single-quoted.elixir'
+    'patterns': [
+      {
+        'include': '#interpolated_elixir'
+      }
+      {
+        'include': '#escaped_char'
+      }
+    ]
+  }
+  {
+    'begin': ':"'
+    'captures':
+      '0':
+        'name': 'punctuation.definition.constant.elixir'
+    'end': '"'
+    'name': 'constant.other.symbol.double-quoted.elixir'
+    'patterns': [
+      {
+        'include': '#interpolated_elixir'
+      }
+      {
+        'include': '#escaped_char'
+      }
+    ]
+  }
+  {
+    'begin': '(?>\'\'\')'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'comment': 'Single-quoted heredocs'
+    'end': '^\\s*\'\'\''
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.heredoc.elixir'
+    'patterns': [
+      {
+        'include': '#interpolated_elixir'
+      }
+      {
+        'include': '#escaped_char'
+      }
+    ]
+  }
+  {
+    'begin': '\''
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'comment': 'single quoted string (allows for interpolation)'
+    'end': '\''
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'support.function.variable.quoted.single.elixir'
+    'patterns': [
+      {
+        'include': '#interpolated_elixir'
+      }
+      {
+        'include': '#escaped_char'
+      }
+    ]
+  }
+  {
+    'begin': '(?>""")'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'comment': 'Double-quoted heredocs'
+    'end': '^\\s*"""'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'string.quoted.double.heredoc.elixir'
+    'patterns': [
+      {
+        'include': '#interpolated_elixir'
+      }
+      {
+        'include': '#escaped_char'
+      }
+    ]
+  }
+  {
+    'begin': '"'
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.elixir'
+    'comment': 'double quoted string (allows for interpolation)'
+    'end': '"'
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.elixir'
+    'name': 'string.quoted.double.elixir'
+    'patterns': [
+      {
+        'include': '#interpolated_elixir'
+      }
+      {
+        'include': '#escaped_char'
+      }
+    ]
   }
 
   # Comments

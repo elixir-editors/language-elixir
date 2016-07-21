@@ -28,7 +28,7 @@
     'body': 'defstruct [$1]'
   'doc':
     'prefix': 'doc'
-    'body': '@doc """\n\b\b${0:documentation}\n"""'
+    'body': '@doc """$0\n"""'
   'do':
     'prefix': 'do'
     'body': 'do\n\t$0\nend'
@@ -46,7 +46,7 @@
     'body': 'defp $1, do: $2'
   'moduledoc':
     'prefix': 'moduledoc'
-    'body': '@moduledoc """\n\b\b${0:documentation}\n"""'
+    'body': '@moduledoc """$0\n"""'
   'defprotocol':
     'prefix': 'defpro'
     'body': 'defprotocol $1 do\n\t$0\nend'
@@ -79,7 +79,7 @@
     'body': '@type ${1:type_name} :: ${2:type}'
   'typedoc':
     'prefix': 'typedoc'
-    'body': '@typedoc """\n\b\b${0:documentation}\n"""'
+    'body': '@typedoc """$0\n"""'
   'fn':
     'prefix': 'fn'
     'body': 'fn($1) -> ${2:...} end'

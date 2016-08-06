@@ -71,6 +71,27 @@
   'spec':
     'prefix': 'spec'
     'body': '@spec ${1:function_name}($2) :: ${3:type}'
+
+  'describe':
+    'prefix': 'describe'
+    'body': """
+      describe "${1:tests}" do
+        $2
+      end
+    """
+
+  'setup':
+    'prefix': 'setup'
+    'body': """
+      setup ${1:%{$2\\}} do
+        $3
+      end
+    """
+
+  'inline setup':
+    'prefix': 'isetup'
+    'body': 'setup [$1]'
+
   'test':
     'prefix': 'test'
     'body': 'test "$1" do\n\t$0\nend'

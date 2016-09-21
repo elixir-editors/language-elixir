@@ -4,10 +4,10 @@
 'name': 'XML (EEx)'
 'patterns': [
   {
-    'include': 'text.xml'
+    'include': 'text.elixir'
   },
   {
-    'include': 'text.elixir'
+    'include': 'text.xml'
   }
 ]
 'scopeName': 'text.xml.elixir'

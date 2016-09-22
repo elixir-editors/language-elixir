@@ -1464,8 +1464,12 @@
     'name': 'comment.line.number-sign.elixir'
   }
   {
-    'match': '\\b_(\\w*)'
-    'name': 'comment.elixir'
+    'match': '\\b_([\\w]+[?!]?)'
+    'name': 'variable.other.unused.comment.elixir'
+  }
+  {
+    'match': '\\b_\\b'
+    'name': 'variable.other.wildcard.comment.elixir'
   }
   {
     'comment': """

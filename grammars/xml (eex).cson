@@ -1,0 +1,13 @@
+'fileTypes': [
+  'xml.eex'
+]
+'name': 'XML (EEx)'
+'patterns': [
+  {
+    'include': 'text.elixir'
+  },
+  {
+    'include': 'text.xml'
+  }
+]
+'scopeName': 'text.xml.elixir'

@@ -1465,11 +1465,11 @@
   }
   {
     'match': '\\b_([\\w]+[?!]?)'
-    'name': 'variable.other.unused.comment.elixir'
+    'name': 'unused.comment.elixir'
   }
   {
     'match': '\\b_\\b'
-    'name': 'variable.other.wildcard.comment.elixir'
+    'name': 'wildcard.comment.elixir'
   }
   {
     'comment': """

@@ -13,8 +13,17 @@ describe "Elixir grammar", ->
     expect(grammar.scopeName).toBe "source.elixir"
 
   it "tokenizes underscore variables as comments", ->
-    {tokens} = grammar.tokenizeLine('_some_variable')
-    expect(tokens[0]).toEqual value: '_some_variable', scopes: ['source.elixir', 'comment.elixir']
+    {tokens} = grammar.tokenizeLine('_some_variable?')
+    expect(tokens[0]).toEqual value: '_some_variable?', scopes: ['source.elixir', 'unused.comment.elixir']
+
+    {tokens} = grammar.tokenizeLine('some_variable')
+    expect(tokens[0]).toEqual value: 'some_variable', scopes: ['source.elixir']
+
+  it "tokenizes underscore as wildcard variable", ->
+    {tokens} = grammar.tokenizeLine('this _ other_thing')
+    expect(tokens[0]).not.toEqual value: 'this ', scopes: ['source.elixir', 'wildcard.comment.elixir']
+    expect(tokens[1]).toEqual value: '_', scopes: ['source.elixir', 'wildcard.comment.elixir']
+    expect(tokens[2]).not.toEqual value: ' other_thing', scopes: ['source.elixir', 'wildcard.comment.elixir']
 
     {tokens} = grammar.tokenizeLine('some_variable')
     expect(tokens[0]).toEqual value: 'some_variable', scopes: ['source.elixir']

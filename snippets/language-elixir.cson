@@ -52,7 +52,7 @@
     'body': '@moduledoc """\n\f$0\n"""'
   'moduletag':
     'prefix': 'moduletag'
-    'body': '@moduletag $0'
+    'body': '@moduletag ${1::${2:your_tag}}'
   'defprotocol':
     'prefix': 'defpro'
     'body': 'defprotocol $1 do\n\t$0\nend'

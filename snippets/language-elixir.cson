@@ -59,6 +59,9 @@
   'defoverridable':
     'prefix': 'defover'
     'body': 'defoverridable [${1:function_name}: ${2:arity}]'
+  'IEx.pry':
+    'prefix': 'pry'
+    'body': 'require IEx\nIEx.pry($0)'
   'IO.inspect':
     'prefix': 'ii'
     'body': 'IO.inspect($0)'

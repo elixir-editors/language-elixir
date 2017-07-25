@@ -116,6 +116,33 @@
   'fn':
     'prefix': 'fn'
     'body': 'fn($1) -> ${2:...} end'
+  'todo':
+    'prefix': 'todo'
+    'body': '# TODO: $0'
+  'fixme':
+    'prefix': 'fix'
+    'body': '# FIXME: $0'
+  'xxx':
+    'prefix': 'xxx'
+    'body': '# XXX: $0'
+  'idea':
+    'prefix': 'idea'
+    'body': '# IDEA: $0'
+  'hack':
+    'prefix': 'hack'
+    'body': '# HACK: $0'
+  'note':
+    'prefix': 'note'
+    'body': '# NOTE: $0'
+  'review':
+    'prefix': 'review'
+    'body': '# REVIEW: $0'
+  'bug':
+    'prefix': 'bug'
+    'body': '# BUG: $0'
+  'question':
+    'prefix': 'question'
+    'body': '# QUESTION: $0'
 '.text.elixir':
   '<% inline %>':
     'prefix': '%'
@@ -138,3 +165,30 @@
   'for':
     'prefix': 'for'
     'body': '<%= for ${1:el} <- ${2:list} do %>\n\t$0\n<% end %>'
+  'todo':
+    'prefix': 'todo'
+    'body': '<%# TODO: $0 %>'
+  'fixme':
+    'prefix': 'fix'
+    'body': '<%# FIXME: $0 %>'
+  'xxx':
+    'prefix': 'xxx'
+    'body': '<%# XXX: $0 %>'
+  'idea':
+    'prefix': 'idea'
+    'body': '<%# IDEA: $0 %>'
+  'hack':
+    'prefix': 'hack'
+    'body': '<%# HACK: $0 %>'
+  'note':
+    'prefix': 'note'
+    'body': '<%# NOTE: $0 %>'
+  'review':
+    'prefix': 'review'
+    'body': '<%# REVIEW: $0 %>'
+  'bug':
+    'prefix': 'bug'
+    'body': '<%# BUG: $0 %>'
+  'question':
+    'prefix': 'question'
+    'body': '<%# QUESTION: $0 %>'

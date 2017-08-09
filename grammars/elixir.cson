@@ -1358,6 +1358,45 @@
     ]
   }
   {
+    'comment': """
+      symbols with single-quoted string, used as keys in Keyword lists.
+
+      In this case, `:` is suffixed to single-quoted string.
+      Leading letter `'` is exactly the same as in ordinary single-quoted string,
+      so this pattern is slightly difficult to capture.
+
+      In order to warn unescaped single-quotes inside matched string,
+      it treats them separately with `.invalid.illegal` scopes.
+
+      It warns you for patterns such as `'foo'bar':`, while not for `'foo\'bar':`.
+    """
+    'match': '(\')(.*)(\':)(?!:)'
+    'name': 'constant.other.symbol.single-quoted.elixir'
+    'captures': {
+      '1':
+        'name': 'punctuation.definition.constant.elixir'
+      '2':
+        'patterns': [
+          {
+            'match': '\\\\\''
+            'name': 'constant.character.escape.elixir'
+          }
+          {
+            'match': '\''
+            'name': 'invalid.illegal.unescaped.single-quote.elixir'
+          }
+          {
+            'include': '#interpolated_elixir'
+          }
+          {
+            'include': '#escaped_char'
+          }
+        ]
+      '3':
+        'name': 'punctuation.definition.constant.elixir'
+    }
+  }
+  {
     'begin': ':"'
     'captures':
       '0':
@@ -1432,6 +1471,39 @@
         'include': '#escaped_char'
       }
     ]
+  }
+  {
+    'comment': """
+      symbols defined by double-quoted string, used as keys in Keyword lists.
+
+      Treats double-quotes inside matched string separately
+      as in the case of symbols defined by single-quoted string.
+    """
+    'match': '(")(.*)(":)(?!:)'
+    'name': 'constant.other.symbol.double-quoted.elixir'
+    'captures': {
+      '1':
+        'name': 'punctuation.definition.constant.elixir'
+      '2':
+        'patterns': [
+          {
+            'match': '\\\\"'
+            'name': 'constant.character.escape.elixir'
+          }
+          {
+            'match': '"'
+            'name': 'invalid.illegal.unescaped.double-quote.elixir'
+          }
+          {
+            'include': '#interpolated_elixir'
+          }
+          {
+            'include': '#escaped_char'
+          }
+        ]
+      '3':
+        'name': 'punctuation.definition.constant.elixir'
+    }
   }
   {
     'begin': '"'

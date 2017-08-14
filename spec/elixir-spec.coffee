@@ -163,22 +163,18 @@ describe "Elixir grammar", ->
     expect(tokens[2]).toEqual value: '":', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'punctuation.definition.constant.elixir']
 
     {tokens} = grammar.tokenizeLine('"symbol as key with unescaped " inside":')
-    expect(tokens[0]).toEqual value: '"', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'punctuation.definition.constant.elixir']
-    expect(tokens[1]).toEqual value: 'symbol as key with unescaped ', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir']
-    expect(tokens[2]).toEqual value: '"', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'invalid.illegal.unescaped.double-quote.elixir']
-    expect(tokens[3]).toEqual value: ' inside', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir']
-    expect(tokens[4]).toEqual value: '":', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'punctuation.definition.constant.elixir']
+    expect(tokens[0]).toEqual value: '"', scopes: ['source.elixir', 'string.quoted.double.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[1]).toEqual value: 'symbol as key with unescaped ', scopes: ['source.elixir', 'string.quoted.double.elixir']
+    expect(tokens[2]).toEqual value: '"', scopes: ['source.elixir', 'string.quoted.double.elixir', 'punctuation.definition.string.end.elixir']
+    expect(tokens[3]).toEqual value: ' inside', scopes: ['source.elixir']
+    expect(tokens[4]).toEqual value: '"', scopes: ['source.elixir', 'string.quoted.double.elixir', 'punctuation.definition.string.begin.elixir']
+    expect(tokens[5]).toEqual value: ':', scopes: ['source.elixir', 'string.quoted.double.elixir']
 
     {tokens} = grammar.tokenizeLine('"symbol as key with escaped \\" inside":')
-    expect(tokens[2]).toEqual value: '\\"', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'constant.character.escape.elixir']
-
-    {tokens} = grammar.tokenizeLine('"symbol as key with improperly-escaped \\\\" inside":')
-    expect(tokens[2]).toEqual value: '\\\\', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'constant.character.escape.elixir']
-    expect(tokens[3]).toEqual value: '"', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'invalid.illegal.unescaped.double-quote.elixir']
-
-    {tokens} = grammar.tokenizeLine('"symbol as key with hard-to-see-but-properly-escaped \\\\\\" inside":')
-    expect(tokens[2]).toEqual value: '\\\\', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'constant.character.escape.elixir']
-    expect(tokens[3]).toEqual value: '\\"', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'constant.character.escape.elixir']
+    expect(tokens[2]).toEqual value: '\\"', scopes: ['source.elixir', 'string.quoted.double.elixir', 'constant.character.escape.elixir']
+    expect(tokens[3]).toEqual value: ' inside', scopes: ['source.elixir', 'string.quoted.double.elixir']
+    expect(tokens[4]).toEqual value: '"', scopes: ['source.elixir', 'string.quoted.double.elixir', 'punctuation.definition.string.end.elixir']
+    expect(tokens[5]).toEqual value: ':', scopes: ['source.elixir', 'punctuation.separator.other.elixir']
 
   it "tokenizes comments", ->
     {tokens} = grammar.tokenizeLine("# TODO: stuff")

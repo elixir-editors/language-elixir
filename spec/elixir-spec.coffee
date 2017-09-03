@@ -171,10 +171,22 @@ describe "Elixir grammar", ->
     expect(tokens[5]).toEqual value: ':', scopes: ['source.elixir', 'string.quoted.double.elixir']
 
     {tokens} = grammar.tokenizeLine('"symbol as key with escaped \\" inside":')
-    expect(tokens[2]).toEqual value: '\\"', scopes: ['source.elixir', 'string.quoted.double.elixir', 'constant.character.escape.elixir']
-    expect(tokens[3]).toEqual value: ' inside', scopes: ['source.elixir', 'string.quoted.double.elixir']
-    expect(tokens[4]).toEqual value: '"', scopes: ['source.elixir', 'string.quoted.double.elixir', 'punctuation.definition.string.end.elixir']
-    expect(tokens[5]).toEqual value: ':', scopes: ['source.elixir', 'punctuation.separator.other.elixir']
+    expect(tokens[1]).toEqual value: 'symbol as key with escaped ', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir']
+    expect(tokens[2]).toEqual value: '\\"', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'constant.character.escape.elixir']
+    expect(tokens[3]).toEqual value: ' inside', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir']
+    expect(tokens[4]).toEqual value: '":', scopes: ['source.elixir', 'constant.other.symbol.double-quoted.elixir', 'punctuation.definition.constant.elixir']
+
+    {tokens} = grammar.tokenizeLine("'charlist as key':")
+    expect(tokens[0]).toEqual value: "'", scopes: ['source.elixir', 'constant.other.symbol.single-quoted.elixir', 'punctuation.definition.constant.elixir']
+    expect(tokens[1]).toEqual value: 'charlist as key', scopes: ['source.elixir', 'constant.other.symbol.single-quoted.elixir']
+    expect(tokens[2]).toEqual value: "':", scopes: ['source.elixir', 'constant.other.symbol.single-quoted.elixir', 'punctuation.definition.constant.elixir']
+
+    {tokens} = grammar.tokenizeLine("'charlist as key with escaped \\' inside':")
+    expect(tokens[0]).toEqual value: "'", scopes: ['source.elixir', 'constant.other.symbol.single-quoted.elixir', 'punctuation.definition.constant.elixir']
+    expect(tokens[1]).toEqual value: 'charlist as key with escaped ', scopes: ['source.elixir', 'constant.other.symbol.single-quoted.elixir']
+    expect(tokens[2]).toEqual value: "\\'", scopes: ['source.elixir', 'constant.other.symbol.single-quoted.elixir', 'constant.character.escape.elixir']
+    expect(tokens[3]).toEqual value: " inside", scopes: ['source.elixir', 'constant.other.symbol.single-quoted.elixir']
+    expect(tokens[4]).toEqual value: "':", scopes: ['source.elixir', 'constant.other.symbol.single-quoted.elixir', 'punctuation.definition.constant.elixir']
 
   it "tokenizes comments", ->
     {tokens} = grammar.tokenizeLine("# TODO: stuff")

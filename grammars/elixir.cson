@@ -1360,16 +1360,8 @@
   {
     'comment': """
       symbols with single-quoted string, used as keys in Keyword lists.
-
-      In this case, `:` is suffixed to single-quoted string.
-      Leading letter `'` is exactly the same as in ordinary single-quoted string,
-      so this pattern is slightly difficult to capture.
-
-      This pattern only matches symbols when they do not have line breaks OR
-      (escaped or unescaped) single-quotes inside outermost single-quotes.
-      Thus, it will not match for patterns like `'foo\'bar':`.
     """
-    'match': '(\')([^\']*)(\':)(?!:)'
+    'match': "(')((?:[^'\\\\]*(?:\\\\.[^'\\\\]*)*))(':)(?!:)"
     'name': 'constant.other.symbol.single-quoted.elixir'
     'captures': {
       '1':
@@ -1465,7 +1457,7 @@
   }
   {
     'comment': 'symbols defined by double-quoted string, used as keys in Keyword lists.'
-    'match': '(")([^"]*)(":)(?!:)'
+    'match': '(")((?:[^"\\\\]*(?:\\\\.[^"\\\\]*)*))(":)(?!:)'
     'name': 'constant.other.symbol.double-quoted.elixir'
     'captures': {
       '1':

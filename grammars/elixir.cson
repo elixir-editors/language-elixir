@@ -114,8 +114,21 @@
     'name': 'keyword.control.elixir'
   }
   {
-    'comment': 'functions and arguments'
-    'match': '\\b(defp?|defmacrop?)\\b\\s*([_$a-zA-Z][$\\w]*[!?]?)?'
+    'comment': 'Function with parameters'
+    'begin': '\\b(defp?|defmacrop?)\\b\\s*([_$a-z][$\\w]*[!?]?)\\s*\\('
+    'beginCaptures': {
+      '1': { 'name': 'keyword.control.elixir' }
+      '2': { 'name': 'entity.name.function.elixir' }
+    }
+    'end': '\\)'
+    'patterns': [
+      { 'include': '$self' }
+      { 'include': '#function_parameter' }
+    ]
+  }
+  {
+    'comment': 'Function without parameters'
+    'match': '\\b(defp?|defmacrop?)\\b\\s*([_$a-z][$\\w]*[!?]?)'
     'captures': {
       '1': { 'name': 'keyword.control.elixir' }
       '2': { 'name': 'entity.name.function.elixir' }
@@ -1623,6 +1636,9 @@
   'escaped_char':
     'match': '\\\\(?:[0-7]{1,3}|x[\\da-fA-F]{1,2}|.)'
     'name': 'constant.character.escape.elixir'
+  'function_parameter':
+    'match': '[_$a-z][$\\w]*[?!]?'
+    'name': 'parameter.variable.function.elixir'
   'interpolated_elixir':
     'patterns': [
       {

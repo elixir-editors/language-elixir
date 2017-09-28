@@ -80,6 +80,9 @@ describe "Elixir grammar", ->
     {tokens} = grammar.tokenizeLine('left |> right')
     expect(tokens[1]).toEqual value: '|>', scopes: ['source.elixir', 'keyword.operator.other.elixir']
 
+    {tokens} = grammar.tokenizeLine('left | right')
+    expect(tokens[1]).toEqual value: '|', scopes: ['source.elixir', 'keyword.operator.other.elixir']
+
     {tokens} = grammar.tokenizeLine('left ++ right')
     expect(tokens[1]).toEqual value: '++', scopes: ['source.elixir', 'keyword.operator.other.elixir']
 

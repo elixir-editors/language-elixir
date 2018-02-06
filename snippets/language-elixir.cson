@@ -14,6 +14,12 @@
   'defp':
     'prefix': 'defp'
     'body': 'defp ${1:function_name} do\n\t$0\nend'
+   'defguard':
+    'prefix': 'defguard'
+    'body': 'defguard ${1:guard_name}($2) when $3'
+  'defguardp':
+    'prefix': 'defguardp'
+    'body': 'defguardp ${1:guard_name}($2) when $3'
   'defmacro':
     'prefix': 'defmacro'
     'body': 'defmacro ${1:macro_name} do\n\t$0\nend'

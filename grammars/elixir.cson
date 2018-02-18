@@ -53,7 +53,7 @@
     'begin': '@(module|type)?doc ~S"""'
     'comment': '@doc with heredocs is treated as documentation'
     'end': '\\s*"""'
-    'name': 'comment.documentation.heredoc.elixir'
+    'name': 'comment.documentation.heredoc.literal.elixir'
     'patterns': [
       {
         'include': '#escaped_char'
@@ -64,7 +64,7 @@
     'begin': "@(module|type)?doc ~S'''"
     'comment': '@doc with heredocs is treated as documentation'
     'end': "\\s*'''"
-    'name': 'comment.documentation.heredoc.elixir'
+    'name': 'comment.documentation.heredoc.literal.elixir'
     'patterns': [
       {
         'include': '#escaped_char'

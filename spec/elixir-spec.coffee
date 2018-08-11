@@ -467,6 +467,13 @@ describe "Elixir grammar", ->
     expect(tokens[1]).toEqual value: 'test #{foo}', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir']
     expect(tokens[2]).toEqual value: '\'\'\'', scopes: ['source.elixir', 'support.function.variable.quoted.single.elixir', 'punctuation.definition.string.end.elixir']
 
+  it "tokenizes ExUnit macros", ->
+    {tokens} = grammar.tokenizeLine("describe 'some description' do")
+    expect(tokens[0]).toEqual value: 'describe', scopes: ['source.elixir', 'keyword.control.elixir']
+
+    {tokens} = grammar.tokenizeLine("test 'some assertion' do")
+    expect(tokens[0]).toEqual value: 'test', scopes: ['source.elixir', 'keyword.control.elixir']
+
   describe "word lists", ->
     it "tokenizes interpolated word lists", ->
       {tokens} = grammar.tokenizeLine('~w"#{foo} bar"')

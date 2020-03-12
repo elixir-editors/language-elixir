@@ -122,6 +122,16 @@
   'fn':
     'prefix': 'fn'
     'body': 'fn($1) -> ${2:...} end'
+  'with':
+    'prefix': 'with'
+    'body': """
+      with $1 <- $2,
+           $3 <- $4 do
+        $5
+      else
+        _ -> nil
+      end
+    """
   'todo':
     'prefix': 'todo'
     'body': '# TODO: $0'

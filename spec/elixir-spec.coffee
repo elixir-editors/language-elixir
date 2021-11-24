@@ -640,14 +640,14 @@ describe "Elixir grammar", ->
       expect(tokens[2]).toEqual value: '\n"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
 
       {tokens} = grammar.tokenizeLine('@doc ~S"""\nTest\n"""')
-      expect(tokens[0]).toEqual value: '@doc ~S"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
-      expect(tokens[1]).toEqual value: '\nTest', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
-      expect(tokens[2]).toEqual value: '\n"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
+      expect(tokens[0]).toEqual value: '@doc ~S"""', scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
+      expect(tokens[1]).toEqual value: '\nTest', scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
+      expect(tokens[2]).toEqual value: '\n"""', scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
 
       {tokens} = grammar.tokenizeLine("@doc ~S'''\nTest\n'''")
-      expect(tokens[0]).toEqual value: "@doc ~S'''", scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
-      expect(tokens[1]).toEqual value: '\nTest', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
-      expect(tokens[2]).toEqual value: "\n'''", scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
+      expect(tokens[0]).toEqual value: "@doc ~S'''", scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
+      expect(tokens[1]).toEqual value: '\nTest', scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
+      expect(tokens[2]).toEqual value: "\n'''", scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
 
     it "does not highlight other sigil heredocs as comments", ->
       {tokens} = grammar.tokenizeLine("@doc '''\nTest\n'''")
@@ -657,19 +657,19 @@ describe "Elixir grammar", ->
       expect(tokens[0]).not.toEqual value: '@doc ~r"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
 
       {tokens} = grammar.tokenizeLine('@doc ~R"""\nTest\n"""')
-      expect(tokens[0]).not.toEqual value: '@doc ~R"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
+      expect(tokens[0]).not.toEqual value: '@doc ~R"""', scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
 
       {tokens} = grammar.tokenizeLine('@doc ~c"""\nTest\n"""')
       expect(tokens[0]).not.toEqual value: '@doc ~c"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
 
       {tokens} = grammar.tokenizeLine('@doc ~C"""\nTest\n"""')
-      expect(tokens[0]).not.toEqual value: '@doc ~C"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
+      expect(tokens[0]).not.toEqual value: '@doc ~C"""', scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
 
       {tokens} = grammar.tokenizeLine('@doc ~w"""\nTest\n"""')
       expect(tokens[0]).not.toEqual value: '@doc ~w"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
 
       {tokens} = grammar.tokenizeLine('@doc ~W"""\nTest\n"""')
-      expect(tokens[0]).not.toEqual value: '@doc ~W"""', scopes: ['source.elixir', 'comment.documentation.heredoc.elixir']
+      expect(tokens[0]).not.toEqual value: '@doc ~W"""', scopes: ['source.elixir', 'comment.documentation.heredoc.literal.elixir']
 
   describe "functions", ->
     it "tokenizes single line functions without parameters", ->
